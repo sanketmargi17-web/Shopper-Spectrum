@@ -1,6 +1,17 @@
 
 from __future__ import annotations
+import streamlit as st
 
+st.warning(
+    "⚠ Product Recommendation model is not included in the deployed version because "
+    "the similarity.pkl file exceeds GitHub's 100 MB limit."
+)
+
+st.info(
+    "The complete project with the trained model is available in the local version."
+)
+
+st.stop()
 import html
 from textwrap import dedent
 
