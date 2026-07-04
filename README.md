@@ -1,7 +1,32 @@
 # Shopper Spectrum v2.0
 
 Shopper Spectrum v2.0 is a production-style Python + Streamlit retail analytics project built around the `online_retail.csv` dataset, saved clustering models, and a cosine-similarity recommendation engine. It is designed for a TY BSc IT final-year project, internship portfolio, and GitHub presentation.
+## Large Model File
 
+Due to GitHub's 100 MB file size limit, the file `models/similarity.pkl` is not included in this repository.
+
+### Google Drive Folder
+
+https://drive.google.com/drive/folders/1E0-NDK21moDtaLzTTHpFvmunCbIRP59S?usp=drive_link
+
+### Instructions
+
+1. Open the Google Drive folder.
+2. Download `similarity.pkl`.
+3. Copy the downloaded file into the `models/` folder.
+4. Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Run the application:
+
+```bash
+streamlit run streamlit/app.py
+```
+
+After placing the file in the `models` folder, the Product Recommendation module will work correctly.
 ## Features
 
 - Modern Streamlit dashboard with responsive custom CSS
