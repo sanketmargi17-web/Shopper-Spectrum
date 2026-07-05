@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
-
+import gdown
 import joblib
 import numpy as np
 import pandas as pd
@@ -722,24 +722,34 @@ def normalize_similarity_object(
     )
 
 
-def load_recommendation_store() -> RecommendationStore:
-    """Load the recommendation artifact, supporting both DataFrame and NumPy models."""
+def load_recommendation_store():
+    """Load recommendation model, downloading it from Google Drive if needed."""
 
     if not SIMILARITY_PATH.exists():
-        raise FileNotFoundError(f"Missing similarity artifact: {SIMILARITY_PATH}")
+        SIMILARITY_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+        file_id = "1HXlJxRNt6P7ucwiGZWX-tZx29dVsg7Ss"
+
+        gdown.download(
+            f"https://drive.google.com/uc?id={file_id}",
+            str(SIMILARITY_PATH),
+            quiet=False,
+        )
 
     similarity_obj = load_joblib_artifact(SIMILARITY_PATH, "similarity")
 
     product_names_obj = None
+
     if PRODUCT_NAMES_PATH.exists():
-        try:
-            product_names_obj = load_joblib_artifact(PRODUCT_NAMES_PATH, "product names")
-        except Exception:
-            product_names_obj = None
+        product_names_obj = load_joblib_artifact(
+            PRODUCT_NAMES_PATH,
+            "product names",
+        )
 
-    return normalize_similarity_object(similarity_obj, product_names_obj)
-
-
+    return normalize_similarity_object(
+        similarity_obj,
+        product_names_obj,
+    )
 def search_products(product_names: list[str], query: str, limit: int = 100) -> list[str]:
     """Return product matches for a text query."""
 
