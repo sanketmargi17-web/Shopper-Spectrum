@@ -1,6 +1,22 @@
 
 from __future__ import annotations
 import streamlit as st
+import gdown
+from pathlib import Path
+
+
+MODEL_PATH = Path("models/similarity.pkl")
+
+if not MODEL_PATH.exists():
+    MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    file_id = "1HXlJxRNt6P7ucwiGZWX-tZx29dVsg7Ss"
+
+    gdown.download(
+        f"https://drive.google.com/uc?id={file_id}",
+        str(MODEL_PATH),
+        quiet=False,
+    )
 
 st.warning(
     "⚠ Product Recommendation model is not included in the deployed version because "
